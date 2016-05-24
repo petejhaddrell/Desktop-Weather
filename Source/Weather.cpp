@@ -36,5 +36,5 @@ void Weather::connect()
     urlStr += "&lon=";
     urlStr += longit;
     
-    std::cout << urlStr;
+//    std::cout << urlStr << "\n";
 }

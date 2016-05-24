@@ -19,15 +19,17 @@ public:
     /** Constructor */
     LocationPeer()
     {
-        // setup for CoreLocation
         locationManager = [[CLLocationManager alloc] init];
         locationManager.distanceFilter = kCLDistanceFilterNone;
         locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters;
         
-        // does a permission check to see if the user has allowed the app to use location data
-        if ([locationManager respondsToSelector:@selector(requestWhenInUseAuthorization)])
+        if (! [CLLocationManager locationServicesEnabled])
         {
-            [locationManager requestWhenInUseAuthorization];
+            std::cout << "Not enabled\n";
+        }
+        else if ([CLLocationManager locationServicesEnabled])
+        {
+            std::cout << "Enabled\n";
         }
         
         [locationManager startUpdatingLocation];
@@ -38,7 +40,36 @@ public:
         [locationManager stopUpdatingLocation];
     }
     
+    void updateLocation()
+    {
+        if ([CLLocationManager authorizationStatus] == kCLAuthorizationStatusNotDetermined)
+        {
+            std::cout << "Not\n";
+            [locationManager startUpdatingLocation];
+            [locationManager stopUpdatingLocation];
+        }
+        else if ([CLLocationManager authorizationStatus] == kCLAuthorizationStatusRestricted)
+        {
+            std::cout << "Restrict\n";
+        }
+        else if ([CLLocationManager authorizationStatus] == kCLAuthorizationStatusAuthorized)
+        {
+            std::cout << "Auth\n";
+            [locationManager startUpdatingLocation];
+        }
+        else if ([CLLocationManager authorizationStatus] == kCLAuthorizationStatusDenied)
+        {
+            std::cout << "Denied\n";
+        }
+    }
+    
+    CLLocationCoordinate2D returnLocation()
+    {
+        return locationManager.location.coordinate;
+    }
+    
     CLLocationManager *locationManager;
+    
 };
 
 
@@ -53,7 +84,7 @@ Location::~Location()
 
 Point<double> Location::getCoordinate()
 {
-    CLLocationCoordinate2D coordinate = peer->locationManager.location.coordinate;
-    std::cout << "\n" << coordinate.latitude << coordinate.longitude << "\n";
+    peer->updateLocation();
+    CLLocationCoordinate2D coordinate = peer->returnLocation();
     return Point<double> (coordinate.latitude, coordinate.longitude);
 }
