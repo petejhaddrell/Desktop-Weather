@@ -5,6 +5,8 @@
               jucerVersion="4.2.1">
   <MAINGROUP id="nvAgJK" name="Desktop-Weather">
     <GROUP id="{328A5AF9-5D06-CB2B-CEEC-A0E8E0A3E92C}" name="Source">
+      <FILE id="z9yRRP" name="Location.mm" compile="1" resource="0" file="Source/Location.mm"/>
+      <FILE id="w6tCae" name="Location.h" compile="0" resource="0" file="Source/Location.h"/>
       <FILE id="UjfhLk" name="Weather.cpp" compile="1" resource="0" file="Source/Weather.cpp"/>
       <FILE id="rg7fCG" name="Weather.h" compile="0" resource="0" file="Source/Weather.h"/>
       <FILE id="pAT01V" name="MainComponent.cpp" compile="1" resource="0"
@@ -14,7 +16,7 @@
     </GROUP>
   </MAINGROUP>
   <EXPORTFORMATS>
-    <XCODE_MAC targetFolder="Builds/MacOSX">
+    <XCODE_MAC targetFolder="Builds/MacOSX" externalLibraries="" extraFrameworks="CoreLocation">
       <CONFIGURATIONS>
         <CONFIGURATION name="Debug" isDebug="1" optimisation="1" targetName="Desktop-Weather"
                        osxSDK="default" osxCompatibility="10.10 SDK" osxArchitecture="default"/>

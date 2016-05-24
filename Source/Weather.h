@@ -12,6 +12,7 @@
 #define WEATHER_H_INCLUDED
 
 #include "../../APIKey/APIKey.h"
+#include "Location.h"
 
 class Weather
 {
@@ -23,6 +24,9 @@ public:
     
 private:
     APIKey key;
+    double longitude;
+    double latitude;
+    Location location;
 };
 
 

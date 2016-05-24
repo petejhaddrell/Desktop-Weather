@@ -22,11 +22,19 @@ Weather::~Weather()
 
 void Weather::connect()
 {
+    latitude = location.getCoordinate().x;
+    longitude = location.getCoordinate().y;
+    
+    String lat (latitude);
+    String longit (longitude);
+    
     //api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}
     String urlStr ("api.openweathermap.org/");
     urlStr += key.getKey();
     urlStr += "/2.5/weather?lat=";
-    //put lat
+    urlStr += lat;
     urlStr += "&lon=";
-    //put lon
+    urlStr += longit;
+    
+    std::cout << urlStr;
 }

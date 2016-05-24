@@ -13,10 +13,13 @@
 MainContentComponent::MainContentComponent()
 {
     setSize (600, 400);
+    startTimer (5000);
+    weather.connect();
 }
 
 MainContentComponent::~MainContentComponent()
 {
+    stopTimer();
 }
 
 void MainContentComponent::paint (Graphics& g)
@@ -33,4 +36,9 @@ void MainContentComponent::resized()
     // This is called when the MainContentComponent is resized.
     // If you add any child components, this is where you should
     // update their positions.
+}
+
+void MainContentComponent::timerCallback()
+{
+    weather.connect();
 }
