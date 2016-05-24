@@ -5,6 +5,8 @@
               jucerVersion="4.2.1">
   <MAINGROUP id="nvAgJK" name="Desktop-Weather">
     <GROUP id="{328A5AF9-5D06-CB2B-CEEC-A0E8E0A3E92C}" name="Source">
+      <FILE id="UjfhLk" name="Weather.cpp" compile="1" resource="0" file="Source/Weather.cpp"/>
+      <FILE id="rg7fCG" name="Weather.h" compile="0" resource="0" file="Source/Weather.h"/>
       <FILE id="pAT01V" name="MainComponent.cpp" compile="1" resource="0"
             file="Source/MainComponent.cpp"/>
       <FILE id="nTLqyw" name="MainComponent.h" compile="0" resource="0" file="Source/MainComponent.h"/>
@@ -15,9 +17,9 @@
     <XCODE_MAC targetFolder="Builds/MacOSX">
       <CONFIGURATIONS>
         <CONFIGURATION name="Debug" isDebug="1" optimisation="1" targetName="Desktop-Weather"
-                       osxSDK="default" osxCompatibility="default" osxArchitecture="default"/>
+                       osxSDK="default" osxCompatibility="10.10 SDK" osxArchitecture="default"/>
         <CONFIGURATION name="Release" isDebug="0" optimisation="3" targetName="Desktop-Weather"
-                       osxSDK="default" osxCompatibility="default" osxArchitecture="default"/>
+                       osxSDK="default" osxCompatibility="10.10 SDK" osxArchitecture="default"/>
       </CONFIGURATIONS>
       <MODULEPATHS>
         <MODULEPATH id="juce_core" path="../../JUCE/modules"/>

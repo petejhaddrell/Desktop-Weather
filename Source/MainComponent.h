@@ -10,7 +10,6 @@
 #define MAINCOMPONENT_H_INCLUDED
 
 #include "../JuceLibraryCode/JuceHeader.h"
-#include "../../APIKey/APIKey.h"
 
 
 //==============================================================================
@@ -27,7 +26,7 @@ public:
 
     void paint (Graphics&) override;
     void resized() override;
-
+    
 private:
     //==============================================================================
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (MainContentComponent)
