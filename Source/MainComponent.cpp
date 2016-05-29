@@ -13,8 +13,9 @@
 MainContentComponent::MainContentComponent()
 {
     setSize (600, 400);
-    startTimer (5000);
+    startTimer (10000);
     weather.connect();
+    background.setCurrentColour (Colours::black);
 }
 
 MainContentComponent::~MainContentComponent()
@@ -24,7 +25,7 @@ MainContentComponent::~MainContentComponent()
 
 void MainContentComponent::paint (Graphics& g)
 {
-    g.fillAll (Colour (0xff001F36));
+    g.fillAll (background.getCurrentColour());
 
     g.setFont (Font (16.0f));
     g.setColour (Colours::white);
@@ -41,4 +42,32 @@ void MainContentComponent::resized()
 void MainContentComponent::timerCallback()
 {
     weather.connect();
+    setColour();
+}
+
+void MainContentComponent::setColour()
+{
+    setBackgroundColour (date.getHours());
+    std::cout << date.getHours() << "\n";
+    repaint();
+}
+
+void MainContentComponent::setBackgroundColour (int tod)
+{
+    if (tod <= 7 || tod >= 22)
+    {
+        background.setCurrentColour (Colours::orange);
+    }
+    else if (tod > 7 && tod <= 13)
+    {
+        background.setCurrentColour (Colours::lightblue);
+    }
+    else if (tod > 13 && tod <= 19)
+    {
+        background.setCurrentColour (Colours::blue);
+    }
+    else if (tod > 19 && tod < 22)
+    {
+        background.setCurrentColour (Colours::orange);
+    }
 }

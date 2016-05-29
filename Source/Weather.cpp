@@ -41,9 +41,9 @@ void Weather::connect()
     urlStr += "&APPID=";
     urlStr += key.getKey();
     
-    std::cout << urlStr << "\n";
+//    std::cout << urlStr << "\n";
     
     URL url (urlStr);
     String textStream = juce::JSON::toString (url.readEntireTextStream(), true);
-    std::cout << textStream << std::endl;
+//    std::cout << textStream << std::endl;
 }

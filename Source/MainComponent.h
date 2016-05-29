@@ -11,6 +11,8 @@
 
 #include "../JuceLibraryCode/JuceHeader.h"
 #include "Weather.h"
+#include "Colours.h"
+#include "Date.h"
 
 
 //==============================================================================
@@ -29,9 +31,14 @@ public:
     void paint (Graphics&) override;
     void resized() override;
     void timerCallback() override;
+    void setColour();
+    void setBackgroundColour (int tod);
     
 private:
     Weather weather;
+    AppColours appColours;
+    ColourSelector background;
+    Date date;
     //==============================================================================
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (MainContentComponent)
 };
