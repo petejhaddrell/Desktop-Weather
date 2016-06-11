@@ -21,6 +21,8 @@ public:
     ~Weather();
     
     void connect();
+    int searchWeatherValue (String weatherStream, String searchTerm, const int searchOffset, const int digitCount);
+    int setWeatherState (const int weatherVal);
     
 private:
     APIKey key;
