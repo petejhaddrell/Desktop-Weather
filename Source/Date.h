@@ -48,4 +48,5 @@ private:
     double dateNode;
 };
 
+
 #endif /* Date_h */

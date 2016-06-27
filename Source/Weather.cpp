@@ -14,6 +14,20 @@ Weather::Weather() :    weatherNode (0.0),
                         tempNode (0.0)
 {}
 
+
+int Weather::searchStream (String weatherStream, String searchTerm, const int searchOffset, const int digitCount, String returnType)
+{
+    int search = weatherStream.indexOf(searchTerm);
+    search += searchOffset;
+    String code = weatherStream.substring (search, search + digitCount);
+    
+    if (returnType == "float")
+        return code.getFloatValue();
+    else
+        return code.getIntValue();
+}
+
+
 void Weather::connect()
 {
    //off while permissions get sorted
@@ -46,17 +60,6 @@ void Weather::connect()
     std::cout <<  weatherNode << std::endl;
 }
 
-int Weather::searchStream (String weatherStream, String searchTerm, const int searchOffset, const int digitCount, String returnType)
-{
-    int search = weatherStream.indexOf(searchTerm);
-    search += searchOffset;
-    String code = weatherStream.substring (search, search + digitCount);
-
-    if (returnType == "float")
-        return code.getFloatValue();
-    else
-        return code.getIntValue();
-}
 
 void Weather::setWeatherNode (const int weatherVal)
 {
@@ -362,8 +365,23 @@ void Weather::setWeatherNode (const int weatherVal)
     weatherNode = weatherVal * weatherMultiplier; //needs to be assigned to correct value
 }
 
+
 void Weather::setTempNode (const float tempVal)
 {
     float celsius = tempVal - 273.15; //converts kelvin to celsius
+    
+    if (tempVal < 250)
+    {
+        tempNode = 0.0;
+    }
+    else if (tempVal > 310)
+    {
+        tempNode = 1.0;
+    }
+    else
+    {
+        tempNode = (tempVal - 250) * 0.0166; //scales it to the range 0 to 0.996
+    }
+    
     std::cout <<  "celsius: " << celsius << std::endl;
 }

@@ -32,11 +32,13 @@ public:
     /** Mutator to set the value for the weatherNode */
     void setWeatherNode (const int weatherVal);
     
+    /** Mutator to set the value for the tempNode */
     void setTempNode (const float tempVal);
     
     /** Accesor to get the value of weatherNode */
     double getWeatherNode() { return weatherNode; };
     
+    /**  Accessor to get the value of the tempNode */
     double getTempNode() { return tempNode; };
     
 private:
@@ -47,8 +49,6 @@ private:
     double weatherNode;
     double tempNode;
 };
-
-
 
 
 #endif  // WEATHER_H_INCLUDED
