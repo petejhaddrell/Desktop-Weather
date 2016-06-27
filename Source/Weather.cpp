@@ -10,15 +10,9 @@
 
 #include "Weather.h"
 
-Weather::Weather()
-{
-    
-}
-
-Weather::~Weather()
-{
-    
-}
+Weather::Weather() :    weatherNode (0.0),
+                        tempNode (0.0)
+{}
 
 void Weather::connect()
 {
@@ -39,29 +33,34 @@ void Weather::connect()
     urlStr += "&lon=";
     urlStr += longit;
     urlStr += "&APPID=";
-    urlStr += key.getKey();
+    urlStr += key.getKey(); //api key is stored seperately to prevent fraudulent use
     
     URL url (urlStr);
     String textStream = juce::JSON::toString (url.readEntireTextStream(), true);
-    int weather = setWeatherState (searchWeatherValue (textStream, "id", 5, 3));
+    setWeatherNode (searchStream (textStream, "id", 5, 3, "int"));
+    setTempNode (searchStream (textStream, "temp", 7, 6, "float"));
     
     //debugging
 //    std::cout << urlStr << "\n";
 //    std::cout << textStream << std::endl;
-    std::cout <<  weather << std::endl;
+    std::cout <<  weatherNode << std::endl;
 }
 
-int Weather::searchWeatherValue (String weatherStream, String searchTerm, const int searchOffset, const int digitCount)
+int Weather::searchStream (String weatherStream, String searchTerm, const int searchOffset, const int digitCount, String returnType)
 {
     int search = weatherStream.indexOf(searchTerm);
     search += searchOffset;
     String code = weatherStream.substring (search, search + digitCount);
-    return code.getIntValue();
+
+    if (returnType == "float")
+        return code.getFloatValue();
+    else
+        return code.getIntValue();
 }
 
-int Weather::setWeatherState (const int weatherVal)
+void Weather::setWeatherNode (const int weatherVal)
 {
-    int scaledWeather = weatherVal;
+    double weatherMultiplier = 0.0;
     
     //Thunderstorm
     if ((weatherVal - 200) < 100)
@@ -70,6 +69,7 @@ int Weather::setWeatherState (const int weatherVal)
         switch (weatherVal)
         {
             case 200: //thunderstorm with light rain
+                
                 break;
             
             case 201: //thunderstorm with rain
@@ -359,5 +359,11 @@ int Weather::setWeatherState (const int weatherVal)
         std::cout << "Error" << std::endl;
     }
     
-    return scaledWeather;
+    weatherNode = weatherVal * weatherMultiplier; //needs to be assigned to correct value
+}
+
+void Weather::setTempNode (const float tempVal)
+{
+    float celsius = tempVal - 273.15; //converts kelvin to celsius
+    std::cout <<  "celsius: " << celsius << std::endl;
 }

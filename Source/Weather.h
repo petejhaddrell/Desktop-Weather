@@ -17,18 +17,35 @@
 class Weather
 {
 public:
+    /** Constructor */
     Weather();
-    ~Weather();
     
+    /** Destructor */
+    ~Weather() {};
+    
+    /** Launches the functions to connect to the api and set the mutators */
     void connect();
-    int searchWeatherValue (String weatherStream, String searchTerm, const int searchOffset, const int digitCount);
-    int setWeatherState (const int weatherVal);
+    
+    /** Searches the stream recieved from the api */
+    int searchStream (String weatherStream, String searchTerm, const int searchOffset, const int digitCount, String returnType);
+    
+    /** Mutator to set the value for the weatherNode */
+    void setWeatherNode (const int weatherVal);
+    
+    void setTempNode (const float tempVal);
+    
+    /** Accesor to get the value of weatherNode */
+    double getWeatherNode() { return weatherNode; };
+    
+    double getTempNode() { return tempNode; };
     
 private:
     APIKey key;
     double longitude;
     double latitude;
     Location location;
+    double weatherNode;
+    double tempNode;
 };
 
 
